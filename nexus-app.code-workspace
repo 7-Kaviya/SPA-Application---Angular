@@ -1,0 +1,80 @@
+{
+  "folders": [
+    { "name": "nexus-app (root)",  "path": "." },
+    { "name": "backend",           "path": "backend" },
+    { "name": "frontend",          "path": "frontend" }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "editor.tabSize": 2,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "angular.ng-template",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "pkief.material-icon-theme",
+      "eamodio.gitlens"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Backend (ts-node)",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npx",
+        "runtimeArgs": ["ts-node-dev", "--respawn", "--transpile-only", "src/server.ts"],
+        "cwd": "${workspaceFolder}/backend",
+        "env": { "PORT": "3000" },
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Install All Dependencies",
+        "type": "shell",
+        "command": "cd backend && npm install && cd ../frontend && npm install",
+        "group": "build",
+        "presentation": { "reveal": "always", "panel": "new" }
+      },
+      {
+        "label": "Start Backend (dev)",
+        "type": "shell",
+        "command": "npm run dev",
+        "options": { "cwd": "${workspaceFolder}/backend" },
+        "group": "build",
+        "presentation": { "reveal": "always", "panel": "new", "group": "servers" },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "Start Frontend (Angular)",
+        "type": "shell",
+        "command": "npm start",
+        "options": { "cwd": "${workspaceFolder}/frontend" },
+        "group": "build",
+        "presentation": { "reveal": "always", "panel": "new", "group": "servers" },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "▶ Run Full Stack",
+        "dependsOn": ["Start Backend (dev)", "Start Frontend (Angular)"],
+        "group": { "kind": "build", "isDefault": true },
+        "presentation": { "reveal": "always" }
+      }
+    ]
+  }
+}
