@@ -36,10 +36,10 @@ npm start
 
 | Role  | User ID  | Password   |
 |-------|----------|------------|
-| Admin | admin01  | Admin@123  |
-| Admin | admin02  | Admin@123  |
-| User  | user01   | User@123   |
-| User  | user02   | User@123   |
+| Admin | admin01  | Admin123  |
+| Admin | admin02  | Admin123  |
+| User  | user01   | User123   |
+| User  | user02   | User123   |
 
 ## API Endpoints
 
